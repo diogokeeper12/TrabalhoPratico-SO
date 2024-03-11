@@ -1,5 +1,5 @@
-#ifndef SCHEDULER_FCFS_H
-#define SCHEDULER_FCFS_H
+#ifndef SCHEDULER_SJF_H
+#define SCHEDULER_SJF_H
 
 #include <stdio.h>
 #include <sys/types.h>
@@ -15,7 +15,9 @@ extern PROCESS *head;
 extern PROCESS *tail;
 
 
-void addToQueueFCFS(char *command[], int tempoEstimado);
-void executeQueueFCFS();
+
+void addToQueueSJF (char *command[], int tempoEstimado);
+void executeQueueSJF();
+
 
 #endif

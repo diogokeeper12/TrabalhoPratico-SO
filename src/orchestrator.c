@@ -1,6 +1,9 @@
 #include "orchestrator.h"
 #include "schedulerFCFS.h"
+#include "schedulerSJF.h"
 
+PROCESS *head = NULL;
+PROCESS *tail = NULL;
 
 #define SIZE 1024
 
@@ -54,12 +57,26 @@ int main(int argc, char* argv[]){
         if(strcmp(argv[2],"execute")==0){
         if(strcmp(argv[4],"-u")==0){
             int time = atoi(argv[3]);
-            addToQueue(&argv[5], time);
+            addToQueueFCFS(&argv[5], time);
         }
        /* else if(strcmp(argv[3],"-p")==0){
         }*/
     }
-    executeQueue();
+    executeQueueFCFS();
+    free(buffer);
+    return 0;
+}
+
+    if(strcmp(argv[1],"SJF")==0){
+        if(strcmp(argv[2],"execute")==0){
+        if(strcmp(argv[4],"-u")==0){
+            int time = atoi(argv[3]);
+            addToQueueSJF(&argv[5], time);
+        }
+       /* else if(strcmp(argv[3],"-p")==0){
+        }*/
+    }
+    executeQueueSJF();
     free(buffer);
     return 0;
     }
