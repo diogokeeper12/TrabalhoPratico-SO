@@ -44,6 +44,6 @@ void executeQueueFCFS() {
         struct Process *current = head;
         head = head->next;
         runProgram(current->command, current->tempoEstimado);
-        free(current); // Libertar memória alocada para o nó atual
+        free(current); 
     }
 }
