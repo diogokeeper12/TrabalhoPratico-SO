@@ -34,8 +34,6 @@ void addToQueueSJF(char *command[], int tempoEstimado) {
         tail = newProcess;
     } else {
         if (tempoEstimado < head->tempoEstimado) {
-            // Se o novo processo tem um tempo estimado menor do que o primeiro da fila,
-            // ele se torna o novo head
             newProcess->next = head;
             head = newProcess;
         } else {
@@ -48,7 +46,6 @@ void addToQueueSJF(char *command[], int tempoEstimado) {
             prev->next = newProcess;
             newProcess->next = current;
             if (current == NULL) {
-                // Se o novo processo tem o maior tempo estimado, ele se torna o novo tail
                 tail = newProcess;
             }
         }
