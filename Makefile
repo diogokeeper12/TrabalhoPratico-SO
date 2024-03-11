@@ -1,6 +1,6 @@
 CC = gcc
 CFLAGS = -Wall -g -Iinclude
-LDFLAGS = 
+LDFLAGS =
 
 all: folders server client
 
@@ -11,7 +11,7 @@ client: bin/client
 folders:
 	@mkdir -p src include obj bin tmp
 
-bin/orchestrator: obj/orchestrator.o
+bin/orchestrator: obj/orchestrator.o obj/schedulerFCFS.o
 	$(CC) $(LDFLAGS) $^ -o $@
 
 bin/client: obj/client.o
@@ -21,4 +21,6 @@ obj/%.o: src/%.c
 	$(CC) $(CFLAGS) -c $< -o $@
 
 clean: 
-	rm -f obj/* tmp/* bin/* 
+	rm -f obj/* tmp/* bin/*
+ 
+ 
