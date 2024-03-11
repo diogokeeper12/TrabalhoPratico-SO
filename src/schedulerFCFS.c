@@ -54,6 +54,6 @@ void executeQueue() {
         struct Process *current = head;
         head = head->next;
         runProgram(current->command, current->tempoEstimado);
-        free(current); // Liberar memória alocada para o nó atual
+        free(current); 
     }
 }
