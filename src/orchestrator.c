@@ -1,18 +1,15 @@
-#include <stdio.h>
-#include <sys/types.h>
-#include <sys/wait.h>
-#include <fcntl.h> 
-#include <signal.h>
-#include <stdlib.h>
-#include <unistd.h>
-#include <string.h>
-#include <sys/time.h> 
 #include "orchestrator.h"
+#include "schedulerFCFS.h"
+
 
 #define SIZE 1024
 
+/*
 PROCESS *head = NULL;
 PROCESS *tail = NULL;
+*/
+
+//TODO: FIFO PARA LER DO CLIENTE
 
 void runProgram(char *command[], int tempoEstimado) {
     char *buffer = malloc(sizeof(char) * SIZE);  
@@ -44,40 +41,6 @@ void runProgram(char *command[], int tempoEstimado) {
     free(buffer);                                
 }
 
-void addToQueue(char *command[], int tempoEstimado) {
-    struct Process *newProcess = (struct Process *)malloc(sizeof(struct Process));
-    if (newProcess == NULL) {
-        perror("Erro ao alocar memória");
-        exit(EXIT_FAILURE);
-    }
-
-    for (int i = 0; command[i] != NULL; ++i) {
-        newProcess->command[i] = strdup(command[i]);
-    }
-    newProcess->tempoEstimado = tempoEstimado;
-    newProcess->next = NULL;
-
-    if (head == NULL) {
-        head = newProcess;
-        tail = newProcess;
-    } else {
-        tail->next = newProcess;
-        tail = newProcess;
-    }
-}
-
-
-
-void executeQueue() {
-    while (head != NULL) {
-        struct Process *current = head;
-        head = head->next;
-        runProgram(current->command, current->tempoEstimado);
-        free(current); // Liberar memória alocada para o nó atual
-    }
-}
-
-
 int main(int argc, char* argv[]){
     char *buffer = malloc(sizeof(char) * SIZE);     
     if(argc == 1){
@@ -85,17 +48,22 @@ int main(int argc, char* argv[]){
         write(1,buffer,nbytes);
         return -1;
     }
-    
-    if(strcmp(argv[1],"execute")==0){
-        if(strcmp(argv[3],"-u")==0){
-            int time = atoi(argv[2]);
-            addToQueue(&argv[4], time);
-        }
-    }
 
+    //EXECUTA O SERVIDOR COM O FCFS...
+    if(strcmp(argv[1],"FCFS")==0){
+        if(strcmp(argv[2],"execute")==0){
+        if(strcmp(argv[4],"-u")==0){
+            int time = atoi(argv[3]);
+            addToQueue(&argv[5], time);
+        }
+       /* else if(strcmp(argv[3],"-p")==0){
+        }*/
+    }
     executeQueue();
     free(buffer);
     return 0;
+    }
+
 }
 
 

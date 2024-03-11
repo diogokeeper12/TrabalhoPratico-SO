@@ -11,7 +11,7 @@
 
 
 
-    
+//TODO: FIFO PARA ESCREVER PARA O SERVER 
 
 
 int main(int argc, char* argv[]){

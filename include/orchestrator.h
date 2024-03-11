@@ -14,6 +14,16 @@
 
 #define SIZE 1024
 
+#include <stdio.h>
+#include <sys/types.h>
+#include <sys/wait.h>
+#include <fcntl.h> 
+#include <signal.h>
+#include <stdlib.h>
+#include <unistd.h>
+#include <string.h>
+#include <sys/time.h> 
+
 
 
 
@@ -32,8 +42,10 @@ typedef struct Process{
 //Assinaturas de funções
 void addToQueue(char *command[], int tempoEstimado);
 void executeQueue();
-void runProgram(char *command[], int tempoEstimado);
+
 */
+void runProgram(char *command[], int tempoEstimado);
+
 
 
 #endif
