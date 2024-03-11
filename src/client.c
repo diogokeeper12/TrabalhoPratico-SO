@@ -7,7 +7,7 @@
 #include <unistd.h>
 #include <string.h>
 #include <time.h> 
-#define MAX 1000
+#define SIZE 1024
 
 
 
